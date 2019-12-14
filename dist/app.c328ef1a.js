@@ -31828,9 +31828,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -31850,10 +31850,36 @@ function (_Component) {
     _this.state = {
       list: ["Go to work", "Clean the house", "Learn some code stuff"]
     };
+    _this.addItem = _this.addItem.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(App, [{
+    key: "addItem",
+    value: function addItem(e) {
+      // Prevent button click from submitting form
+      e.preventDefault(); // Create variables for our list, the item to add, and our form
+
+      var list = this.state.list;
+      var newItem = document.getElementById("addInput");
+      var form = document.getElementById("addItemFrom"); // If our input has a value
+
+      if (newItem.value != "") {
+        // Add the new item to the end of our list array
+        list.push(newItem.value); //then we use that to set the state for list
+
+        this.setState({
+          list: list
+        }); //Finally, we need to reset the form
+
+        newItem.classList.remove("is-danger");
+        form.reset();
+      } else {
+        // If the input doesn't have, make the border red since it's required
+        newItem.classList.add("is-danger");
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
@@ -31866,7 +31892,20 @@ function (_Component) {
         return _react.default.createElement("li", {
           key: item
         }, item);
-      })))));
+      }))), _react.default.createElement("hr", null), _react.default.createElement("section", {
+        className: "section"
+      }, _react.default.createElement("form", {
+        className: "form",
+        id: "addItemForm"
+      }, _react.default.createElement("input", {
+        type: "text",
+        className: "input",
+        id: "addInput",
+        placeholder: "Something that needs to be done..."
+      }), _react.default.createElement("button", {
+        className: "button is-info",
+        onClick: this.addItem
+      }, "Add Item")))));
     }
   }]);
 
@@ -31902,7 +31941,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50441" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50586" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
