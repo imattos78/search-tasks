@@ -31851,6 +31851,7 @@ function (_Component) {
       list: ["Go to work", "Clean the house", "Learn some code stuff"]
     };
     _this.addItem = _this.addItem.bind(_assertThisInitialized(_this));
+    _this.removeItem = _this.removeItem.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -31880,8 +31881,28 @@ function (_Component) {
       }
     }
   }, {
+    key: "removeItem",
+    value: function removeItem(item) {
+      //Put our list into an array
+      var list = this.state.list.slice(); //Check to see if item passed in matches item in array 
+
+      list.some(function (el, i) {
+        if (el === item) {
+          //if item matches, remove it from array
+          list.splice(i, 1);
+          return true;
+        }
+      }); // Set state to list
+
+      this.setState({
+        list: list
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return _react.default.createElement("div", {
         className: "content"
       }, _react.default.createElement("div", {
@@ -31891,7 +31912,12 @@ function (_Component) {
       }, _react.default.createElement("ul", null, this.state.list.map(function (item) {
         return _react.default.createElement("li", {
           key: item
-        }, item);
+        }, item, " \xA0", _react.default.createElement("span", {
+          className: "delete",
+          onClick: function onClick() {
+            return _this2.removeItem(item);
+          }
+        }));
       }))), _react.default.createElement("hr", null), _react.default.createElement("section", {
         className: "section"
       }, _react.default.createElement("form", {
@@ -31941,7 +31967,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50586" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50814" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

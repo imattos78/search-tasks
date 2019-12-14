@@ -13,6 +13,7 @@ class App extends Component {
             ]
         }
         this.addItem = this.addItem.bind(this)
+        this.removeItem = this.removeItem.bind(this)
     }
     addItem(e){
             // Prevent button click from submitting form
@@ -41,6 +42,24 @@ class App extends Component {
         }
 
     }
+
+    removeItem(item){
+        //Put our list into an array
+        const list = this.state.list.slice();
+
+        //Check to see if item passed in matches item in array 
+        list.some((el, i)=>{
+            if(el === item) {
+                //if item matches, remove it from array
+                list.splice(i, 1);
+                return true;
+            }
+        });
+        // Set state to list
+        this.setState({
+            list: list
+        });
+    }
     render() {
         return (
             <div className="content">
@@ -48,7 +67,9 @@ class App extends Component {
                     <section className="section">
                         <ul>
                             {this.state.list.map(item =>(
-                                <li key={item}>{item}</li>
+                                <li key={item}>{item} &nbsp;
+                                <span className="delete" onClick={() => this.removeItem(item)} />
+                                </li>
                                 ))}
                         </ul>
                     </section>
