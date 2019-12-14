@@ -24,6 +24,15 @@ class App extends Component {
                                 ))}
                         </ul>
                     </section>
+                    <hr />
+                    <section className="section">
+                        <form className="form" id="addItemForm">
+                            <input type="text" className="input" id="addInput" placeholder="Something that needs to be done..." />
+                            <button className="button is-info" onClick={this.addItem}>
+                                Add Item
+                            </button>
+                        </form>
+                    </section>
                 </div>
             </div>
         )
