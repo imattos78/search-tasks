@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import 'bulma/bulma'
+import List from './components/list'
 
 class App extends Component {
     constructor(props){
@@ -12,6 +13,7 @@ class App extends Component {
                 "Learn some code stuff"
             ]
         }
+        
         this.addItem = this.addItem.bind(this)
         this.removeItem = this.removeItem.bind(this)
     }
@@ -65,22 +67,16 @@ class App extends Component {
             <div className="content">
                 <div className="container">
                     <section className="section">
-                        <ul>
-                            {this.state.list.map(item =>(
-                                <li key={item}>{item} &nbsp;
-                                <span className="delete" onClick={() => this.removeItem(item)} />
-                                </li>
-                                ))}
-                        </ul>
-                    </section>
-                    <hr />
-                    <section className="section">
                         <form className="form" id="addItemForm">
                             <input type="text" className="input" id="addInput" placeholder="Something that needs to be done..." />
                             <button className="button is-info" onClick={this.addItem}>
                                 Add Item
                             </button>
                         </form>
+                    </section>
+                    <hr />
+                    <section className="section">
+                    <List item={this.state.list} removeItem={this.removeItem} /> 
                     </section>
                 </div>
             </div>

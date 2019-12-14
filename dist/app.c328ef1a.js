@@ -31803,7 +31803,71 @@ module.exports = reloadCSS;
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":"node_modules/parcel/src/builtins/css-loader.js"}],"app.js":[function(require,module,exports) {
+},{"_css_loader":"node_modules/parcel/src/builtins/css-loader.js"}],"components/list.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var List =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(List, _React$Component);
+
+  function List(props) {
+    _classCallCheck(this, List);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(List).call(this, props));
+  }
+
+  _createClass(List, [{
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      return _react.default.createElement("ul", null, this.props.item.map(function (item) {
+        return _react.default.createElement("li", {
+          key: item
+        }, item, " \xA0", _react.default.createElement("span", {
+          className: "delete",
+          onClick: function onClick() {
+            return _this.props.removeItem(item);
+          }
+        }));
+      }));
+    }
+  }]);
+
+  return List;
+}(_react.default.Component);
+
+var _default = List;
+exports.default = _default;
+},{"react":"node_modules/react/index.js"}],"app.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireWildcard(require("react"));
@@ -31811,6 +31875,8 @@ var _react = _interopRequireWildcard(require("react"));
 var _reactDom = _interopRequireDefault(require("react-dom"));
 
 require("bulma/bulma");
+
+var _list = _interopRequireDefault(require("./components/list"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31901,24 +31967,11 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       return _react.default.createElement("div", {
         className: "content"
       }, _react.default.createElement("div", {
         className: "container"
       }, _react.default.createElement("section", {
-        className: "section"
-      }, _react.default.createElement("ul", null, this.state.list.map(function (item) {
-        return _react.default.createElement("li", {
-          key: item
-        }, item, " \xA0", _react.default.createElement("span", {
-          className: "delete",
-          onClick: function onClick() {
-            return _this2.removeItem(item);
-          }
-        }));
-      }))), _react.default.createElement("hr", null), _react.default.createElement("section", {
         className: "section"
       }, _react.default.createElement("form", {
         className: "form",
@@ -31931,7 +31984,12 @@ function (_Component) {
       }), _react.default.createElement("button", {
         className: "button is-info",
         onClick: this.addItem
-      }, "Add Item")))));
+      }, "Add Item"))), _react.default.createElement("hr", null), _react.default.createElement("section", {
+        className: "section"
+      }, _react.default.createElement(_list.default, {
+        item: this.state.list,
+        removeItem: this.removeItem
+      }))));
     }
   }]);
 
@@ -31939,7 +31997,7 @@ function (_Component) {
 }(_react.Component);
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById('app'));
-},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","bulma/bulma":"node_modules/bulma/bulma.sass"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","bulma/bulma":"node_modules/bulma/bulma.sass","./components/list":"components/list.js"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -31967,7 +32025,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50814" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54361" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
