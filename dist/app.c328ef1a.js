@@ -31825,9 +31825,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -31839,26 +31839,88 @@ function (_React$Component) {
   _inherits(List, _React$Component);
 
   function List(props) {
+    var _this;
+
     _classCallCheck(this, List);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(List).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(List).call(this, props));
+    _this.state = {
+      filtered: []
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(List, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        filtered: this.props.items
+      });
+    }
+  }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      this.setState({
+        filtered: nextProps.items
+      });
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      // Variable to hold the original version of the list
+      var currentList = []; // Variable to hold the filtered list before putting into state
+
+      var newList = []; // If the search bar isn't empty
+
+      if (e.target.value !== "") {
+        // Assign the original list to currentList
+        currentList = this.props.items; // Use .filter() to determine which items should be displayed
+        // based on the search terms
+
+        newList = currentList.filter(function (item) {
+          // change current item to lowercase
+          var lc = item.toLowerCase(); // change search term to lowercase
+
+          var filter = e.target.value.toLowerCase(); // check to see if the current list item includes the search term
+          // If it does, it will be added to newList. Using lowercase eliminates
+          // issues with capitalization in search terms and search content
+
+          console.log(lc.includes(filter));
+          return lc.includes(filter);
+        });
+      } else {
+        // If the search bar is empty, set newList to original task list
+        newList = this.props.items;
+      } // Set the filtered state based on what our rules added to newList
+
+
+      console.log(newList);
+      this.setState({
+        filtered: newList
+      });
+      console.log(this.state.filtered);
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
-      return _react.default.createElement("ul", null, this.props.item.map(function (item) {
+      return _react.default.createElement("div", null, _react.default.createElement("input", {
+        type: "text",
+        className: "input",
+        onChange: this.handleChange,
+        placeholder: "Search..."
+      }), _react.default.createElement("ul", null, this.props.items.map(function (item) {
         return _react.default.createElement("li", {
           key: item
         }, item, " \xA0", _react.default.createElement("span", {
           className: "delete",
           onClick: function onClick() {
-            return _this.props.removeItem(item);
+            return _this2.props.removeItem(item);
           }
         }));
-      }));
+      })));
     }
   }]);
 
@@ -31902,6 +31964,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+// import Input from './components/input'
 var App =
 /*#__PURE__*/
 function (_Component) {
@@ -31987,7 +32050,7 @@ function (_Component) {
       }, "Add Item"))), _react.default.createElement("hr", null), _react.default.createElement("section", {
         className: "section"
       }, _react.default.createElement(_list.default, {
-        item: this.state.list,
+        items: this.state.list,
         removeItem: this.removeItem
       }))));
     }
@@ -32025,7 +32088,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54361" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51638" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

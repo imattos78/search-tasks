@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import 'bulma/bulma'
 import List from './components/list'
+// import Input from './components/input'
 
 class App extends Component {
     constructor(props){
@@ -76,7 +77,7 @@ class App extends Component {
                     </section>
                     <hr />
                     <section className="section">
-                    <List item={this.state.list} removeItem={this.removeItem} /> 
+                    <List items={this.state.list} removeItem={this.removeItem} /> 
                     </section>
                 </div>
             </div>
